@@ -1,53 +1,50 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import './itemList.css';
-import GotService from '../../services/gotService';
 import Spinner from '../spinner';
-export default class ItemList extends Component {
 
-    gotService = new GotService();
+const ItemList = ({getData, onItemSelected, renderItem}) => {
 
-    state = {
-        charList: null
-    }
+    const [itemList, updateList] = useState([]);
 
-    componentDidMount() {
-        this.gotService.getAllCharacters()
-            .then((charList) => {
-                this.setState({
-                    charList
-                })
+    useEffect(() => {
+        getData()
+            .then((data) => {
+                updateList(data)
             })
-    }
+    }, []);
 
-    renderItems(arr) {
+
+    function renderItems(arr) {
         return arr.map((item) => {
+            const {id} = item;
+
+            const label = renderItem(item);
+
             return (
                 <li 
-                    key = {item.id}
+                    key={id}
                     className="list-group-item"
-                    onClick={() => this.props.onCharSelected(item.id)}>
-                    {item.name}
+                    onClick={ () => onItemSelected(id)}>
+                    {label}
                 </li>
             )
-        });
+        })
     }
 
-    render() {
 
-        const {charList} = this.state;
-
-        
-
-        if (!charList) {
-            return <Spinner/>;
-        }
-
-        const items = this.renderItems(charList);
-
-        return (
-            <ul className="item-list list-group">
-                {items}
-            </ul>
-        );
+    if (!itemList) {
+        return <Spinner/>
     }
+
+    const items = renderItems(itemList);
+
+    return (
+        <ul className="item-list list-group">
+            {items}
+        </ul>
+    );
+    
 }
+
+export default ItemList;
+
