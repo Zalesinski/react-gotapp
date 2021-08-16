@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing <RandomChar/> RandomChar has rendered correctly 1`] = `
+<div
+  className="random-block rounded"
+>
+  <div
+    className="lds-css ng-scope"
+  >
+    <div
+      className="lds-spin"
+    >
+      <div>
+        <div />
+      </div>
+      <div>
+        <div />
+      </div>
+      <div>
+        <div />
+      </div>
+      <div>
+        <div />
+      </div>
+      <div>
+        <div />
+      </div>
+      <div>
+        <div />
+      </div>
+      <div>
+        <div />
+      </div>
+      <div>
+        <div />
+      </div>
+    </div>
+  </div>
+</div>
+`;
